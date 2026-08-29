@@ -24,10 +24,7 @@ const imageModules = import.meta.glob(
 )
 
 /* =========================
-   OBTENER NÚMERO DEL ARCHIVO
-
-   IMG_0109.JPG -> 109
-   IMG_1853.jpg -> 1853
+   OBTENER NÚMERO
 ========================= */
 
 const getImageNumber = (path) => {
@@ -43,9 +40,7 @@ const getImageNumber = (path) => {
 }
 
 /* =========================
-   DETECTAR FOTOS DEL BEBÉ
-
-   IMG_0100 - IMG_0399
+   DETECTAR FOTOS DE BEBÉ
 ========================= */
 
 const isBabyPhoto = (path) => {
@@ -55,7 +50,7 @@ const isBabyPhoto = (path) => {
 }
 
 /* =========================
-   ORDENAR TODAS LAS FOTOS
+   ORDENAR FOTOS
 ========================= */
 
 const sortedImages = Object.entries(imageModules).sort(
@@ -72,7 +67,7 @@ const sortedImages = Object.entries(imageModules).sort(
 )
 
 /* =========================
-   SEPARAR BEBÉ / RESTO
+   SEPARAR SESIÓN DE BEBÉ
 ========================= */
 
 const babyImages = sortedImages.filter(([path]) =>
@@ -84,7 +79,7 @@ const otherImages = sortedImages.filter(
 )
 
 /* =========================
-   METER SESIÓN DE BEBÉ
+   INSERTAR SESIÓN DE BEBÉ
    APROX. DESDE FOTO 60
 ========================= */
 
@@ -102,7 +97,7 @@ const orderedImages = [
 ]
 
 /* =========================
-   CREAR OBJETOS
+   CREAR PORTFOLIO
 ========================= */
 
 const portfolioItems = orderedImages.map(
@@ -223,9 +218,8 @@ function Portfolio() {
   }
 
   /* =========================
-     DOTS
-
-     SOLO MOSTRAMOS 7
+     PROGRESS
+     SOLO 7 INDICADORES
   ========================= */
 
   const getProgressIndexes = () => {
@@ -299,6 +293,12 @@ function Portfolio() {
   const activeItem =
     portfolioItems[activeIndex]
 
+  const activeFilename =
+    activeItem.filename.replace(
+      /\.[^/.]+$/,
+      ''
+    )
+
   const progressIndexes =
     getProgressIndexes()
 
@@ -310,11 +310,11 @@ function Portfolio() {
       onKeyDown={handleKeyDown}
     >
       {/* =========================
-          BACKGROUND WORD
+          BACKGROUND
       ========================= */}
 
       <div className="portfolio__background-word">
-        PORTFOLIO
+        ARCHIVE
       </div>
 
       <div className="portfolio__container">
@@ -345,21 +345,31 @@ function Portfolio() {
         </div>
 
         {/* =========================
-            HEADING
+            INTRO
         ========================= */}
 
-        <div className="portfolio__heading">
+        <div className="portfolio__intro">
           <p className="portfolio__eyebrow">
-            Una mirada a mi trabajo
+            <span />
+            ARCHIVO VISUAL
+            <span />
           </p>
 
           <h2 className="portfolio__title">
-            Historias convertidas
+            <span className="portfolio__title-primary">
+              Momentos que permanecen.
+            </span>
 
-            <span>
-              en imágenes.
+            <span className="portfolio__title-accent">
+              Una imagen a la vez.
             </span>
           </h2>
+
+          <p className="portfolio__description">
+            Retratos, sesiones y momentos reunidos
+            en un archivo visual construido
+            a través de la fotografía.
+          </p>
         </div>
 
         {/* =========================
@@ -368,38 +378,52 @@ function Portfolio() {
 
         <div className="portfolio__stage">
           {/* =========================
-              COUNTER
+              STAGE HEADER
           ========================= */}
 
-          <div className="portfolio__counter">
-            <span>
-              {String(
-                activeIndex + 1
-              ).padStart(2, '0')}
-            </span>
+          <div className="portfolio__stage-header">
+            {/* COUNTER */}
 
-            <span className="portfolio__counter-line" />
+            <div className="portfolio__counter">
+              <span className="portfolio__counter-current">
+                {String(
+                  activeIndex + 1
+                ).padStart(2, '0')}
+              </span>
 
-            <span>
-              {String(total).padStart(
-                2,
-                '0'
-              )}
-            </span>
-          </div>
+              <span className="portfolio__counter-line" />
 
-          {/* =========================
-              CATEGORY
-          ========================= */}
+              <span className="portfolio__counter-total">
+                {String(total).padStart(
+                  2,
+                  '0'
+                )}
+              </span>
+            </div>
 
-          <div className="portfolio__category">
-            <span>
-              {activeItem.title}
-            </span>
+            {/* ACTIVE CATEGORY */}
 
-            <small>
-              {activeItem.category}
-            </small>
+            <div className="portfolio__active-meta">
+              <span>
+                {activeItem.title}
+              </span>
+
+              <small>
+                {activeItem.category}
+              </small>
+            </div>
+
+            {/* FILE */}
+
+            <div className="portfolio__archive-meta">
+              <span>
+                ARCHIVE / {activeFilename}
+              </span>
+
+              <small>
+                SAN FELIPE · GTO
+              </small>
+            </div>
           </div>
 
           {/* =========================
@@ -407,7 +431,7 @@ function Portfolio() {
           ========================= */}
 
           <div className="portfolio__carousel-wrap">
-            {/* IZQUIERDA */}
+            {/* CONTROL LEFT */}
 
             <button
               type="button"
@@ -415,10 +439,14 @@ function Portfolio() {
               onClick={goToPrevious}
               aria-label="Fotografía anterior"
             >
-              <span className="portfolio__control-icon portfolio__control-icon--left" />
+              <span className="portfolio__control-circle">
+                <span className="portfolio__control-icon portfolio__control-icon--left" />
+              </span>
             </button>
 
-            {/* FOTOS */}
+            {/* =========================
+                PHOTOS
+            ========================= */}
 
             <div className="portfolio__carousel">
               {portfolioItems.map(
@@ -433,6 +461,9 @@ function Portfolio() {
                     return null
                   }
 
+                  const isActive =
+                    index === activeIndex
+
                   return (
                     <button
                       key={item.id}
@@ -444,6 +475,11 @@ function Portfolio() {
                       aria-label={`Ver fotografía ${
                         index + 1
                       } de ${total}`}
+                      aria-current={
+                        isActive
+                          ? 'true'
+                          : undefined
+                      }
                     >
                       <div
                         className="portfolio__frame"
@@ -451,6 +487,12 @@ function Portfolio() {
                           '--portfolio-image': `url("${item.image}")`,
                         }}
                       >
+                        {/* BACKDROP */}
+
+                        <span className="portfolio__frame-backdrop" />
+
+                        {/* IMAGE */}
+
                         <img
                           className="portfolio__image"
                           src={item.image}
@@ -458,8 +500,7 @@ function Portfolio() {
                             index + 1
                           } del portafolio de Danno`}
                           loading={
-                            index ===
-                            activeIndex
+                            isActive
                               ? 'eager'
                               : 'lazy'
                           }
@@ -467,31 +508,61 @@ function Portfolio() {
                           draggable="false"
                         />
 
+                        {/* CINEMATIC OVERLAY */}
+
                         <div className="portfolio__overlay" />
 
-                        <span className="portfolio__frame-label">
-                          FRAME{' '}
+                        {/* PERMANENT LIGHT */}
 
-                          {String(
-                            item.id
-                          ).padStart(3, '0')}
-                        </span>
+                        <span className="portfolio__exposure-light" />
 
-                        <div className="portfolio__focus">
+                        {/* FRAME */}
+
+                        <div className="portfolio__viewfinder">
                           <span />
                           <span />
                           <span />
                           <span />
+
+                          <div className="portfolio__viewfinder-cross">
+                            <span />
+                            <span />
+                          </div>
                         </div>
 
-                        <div className="portfolio__frame-info">
+                        {/* TOP META */}
+
+                        <div className="portfolio__frame-top">
                           <span>
-                            {item.title}
+                            FRAME{' '}
+                            {String(
+                              item.id
+                            ).padStart(3, '0')}
                           </span>
 
                           <small>
-                            {item.category}
+                            DANNO / ARCHIVE
                           </small>
+                        </div>
+
+                        {/* BOTTOM META */}
+
+                        <div className="portfolio__frame-info">
+                          <div>
+                            <span>
+                              {item.title}
+                            </span>
+
+                            <small>
+                              {item.category}
+                            </small>
+                          </div>
+
+                          <span className="portfolio__frame-index">
+                            {String(
+                              index + 1
+                            ).padStart(3, '0')}
+                          </span>
                         </div>
                       </div>
                     </button>
@@ -500,7 +571,7 @@ function Portfolio() {
               )}
             </div>
 
-            {/* DERECHA */}
+            {/* CONTROL RIGHT */}
 
             <button
               type="button"
@@ -508,44 +579,67 @@ function Portfolio() {
               onClick={goToNext}
               aria-label="Siguiente fotografía"
             >
-              <span className="portfolio__control-icon portfolio__control-icon--right" />
+              <span className="portfolio__control-circle">
+                <span className="portfolio__control-icon portfolio__control-icon--right" />
+              </span>
             </button>
           </div>
 
           {/* =========================
-              PROGRESS
+              FOOTER
           ========================= */}
 
-          <div className="portfolio__progress">
-            {progressIndexes.map(
-              (index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={`portfolio__dot ${
-                    activeIndex === index
-                      ? 'portfolio__dot--active'
-                      : ''
-                  }`}
-                  onClick={() =>
-                    setActiveIndex(index)
-                  }
-                  aria-label={`Ir a fotografía ${
-                    index + 1
-                  }`}
-                />
-              )
-            )}
+          <div className="portfolio__footer">
+            <div className="portfolio__footer-meta">
+              <span>
+                DANNO / PHOTOGRAPHY
+              </span>
+
+              <span className="portfolio__footer-line" />
+
+              <span>
+                {activeFilename}
+              </span>
+            </div>
+
+            {/* PROGRESS */}
+
+            <div className="portfolio__progress">
+              {progressIndexes.map(
+                (index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`portfolio__dot ${
+                      activeIndex === index
+                        ? 'portfolio__dot--active'
+                        : ''
+                    }`}
+                    onClick={() =>
+                      setActiveIndex(index)
+                    }
+                    aria-label={`Ir a fotografía ${
+                      index + 1
+                    }`}
+                  >
+                    <span />
+                  </button>
+                )
+              )}
+            </div>
+
+            <p className="portfolio__hint">
+              <span className="portfolio__hint-key">
+                ←
+              </span>
+
+              Navega el archivo
+
+              <span className="portfolio__hint-key">
+                →
+              </span>
+            </p>
           </div>
-
-          {/* =========================
-              HINT
-          ========================= */}
-
-          <p className="portfolio__hint">
-            Usa las flechas o selecciona
-            una fotografía
-          </p>
         </div>
       </div>
     </section>

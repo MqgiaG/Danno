@@ -96,12 +96,14 @@ function Services() {
         <div className="services__heading">
           <p className="services__eyebrow">
             <span />
-            SERVICIOS
+
+            EXPERIENCIAS VISUALES
+
             <span />
           </p>
 
           <h2 className="services__title">
-            <span>
+            <span className="services__title-primary">
               Una idea.
             </span>
 
@@ -111,13 +113,14 @@ function Services() {
           </h2>
 
           <p className="services__description">
-            Elige el tipo de sesión o cobertura que mejor
-            se adapte a lo que tienes en mente.
+            Fotografía, video y cobertura de eventos
+            pensados para convertir cada idea en una
+            historia visual propia.
           </p>
         </div>
 
         {/* =========================
-            SERVICES
+            SERVICES LIST
         ========================= */}
 
         <div className="services__list">
@@ -133,10 +136,17 @@ function Services() {
                     ? 'services__item--active'
                     : ''
                 }`}
+                style={{
+                  '--service-delay': `${index * 3}s`,
+                }}
                 onMouseEnter={() =>
                   handleServiceChange(index)
                 }
               >
+                {/* ambient moving light */}
+
+                <span className="services__item-light" />
+
                 {/* =========================
                     TRIGGER
                 ========================= */}
@@ -151,10 +161,19 @@ function Services() {
                     handleServiceChange(index)
                   }
                   aria-expanded={isActive}
+                  aria-controls={`service-panel-${service.id}`}
                 >
-                  <div className="services__number">
-                    {service.id}
+                  {/* INDEX */}
+
+                  <div className="services__number-wrap">
+                    <span className="services__number">
+                      {service.id}
+                    </span>
+
+                    <span className="services__number-line" />
                   </div>
+
+                  {/* NAME */}
 
                   <div className="services__main">
                     <div className="services__name">
@@ -172,6 +191,8 @@ function Services() {
                     </span>
                   </div>
 
+                  {/* PRICE */}
+
                   <div className="services__price">
                     <small>
                       DESDE
@@ -180,9 +201,18 @@ function Services() {
                     <strong>
                       {service.price}
                     </strong>
+
+                    <span>
+                      MXN
+                    </span>
                   </div>
 
-                  <span className="services__plus">
+                  {/* PLUS */}
+
+                  <span
+                    className="services__plus"
+                    aria-hidden="true"
+                  >
                     <span />
                     <span />
                   </span>
@@ -192,19 +222,47 @@ function Services() {
                     CONTENT
                 ========================= */}
 
-                <div className="services__content">
+                <div
+                  className="services__content"
+                  id={`service-panel-${service.id}`}
+                >
                   <div className="services__content-inner">
                     <div className="services__content-space" />
 
                     <div className="services__content-main">
+                      <div className="services__content-label">
+                        <span>
+                          DANNO / SERVICE
+                        </span>
+
+                        <span className="services__content-label-line" />
+
+                        <span>
+                          {service.id}
+                        </span>
+                      </div>
+
                       <p className="services__item-description">
                         {service.description}
                       </p>
 
                       <div className="services__details">
                         {service.details.map(
-                          (detail) => (
-                            <span key={detail}>
+                          (detail, detailIndex) => (
+                            <span
+                              key={detail}
+                              style={{
+                                '--detail-delay': `${
+                                  detailIndex * 0.15
+                                }s`,
+                              }}
+                            >
+                              <i>
+                                {String(
+                                  detailIndex + 1
+                                ).padStart(2, '0')}
+                              </i>
+
                               {detail}
                             </span>
                           )
@@ -213,9 +271,13 @@ function Services() {
                     </div>
 
                     <div className="services__content-side">
-                      <span>
-                        {service.price}
+                      <span className="services__content-side-label">
+                        INVERSIÓN
                       </span>
+
+                      <strong>
+                        {service.price}
+                      </strong>
 
                       <small>
                         MXN
@@ -225,12 +287,16 @@ function Services() {
                 </div>
 
                 {/* =========================
-                    DECORATION
+                    GIANT NUMBER
                 ========================= */}
 
                 <span className="services__giant-number">
                   {service.id}
                 </span>
+
+                {/* =========================
+                    CAMERA FOCUS
+                ========================= */}
 
                 <div className="services__focus">
                   <span />
@@ -259,7 +325,8 @@ function Services() {
             </span>
 
             <small>
-              Cuéntame qué quieres crear y revisamos las opciones.
+              Cuéntame qué quieres crear y construimos
+              una propuesta para tu proyecto.
             </small>
           </div>
 
@@ -267,9 +334,13 @@ function Services() {
             className="services__cta"
             href="#reservar"
           >
-            <span>
+            <span className="services__cta-light" />
+
+            <span className="services__cta-text">
               CUÉNTAME TU PROYECTO
             </span>
+
+            <span className="services__cta-line" />
 
             <span className="services__cta-icon">
               <span />

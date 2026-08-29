@@ -121,9 +121,16 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
       className="contact"
       id="contacto"
     >
+      {/* =========================
+          BACKGROUND
+      ========================= */}
+
       <div className="contact__background-word">
         CONTACT
       </div>
+
+      <div className="contact__ambient contact__ambient--one" />
+      <div className="contact__ambient contact__ambient--two" />
 
       <div className="contact__container">
         {/* =========================
@@ -159,12 +166,14 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
         <div className="contact__heading">
           <p className="contact__eyebrow">
             <span />
+
             HABLEMOS DE TU IDEA
+
             <span />
           </p>
 
           <h2 className="contact__title">
-            <span>
+            <span className="contact__title-primary">
               Reserva tu
             </span>
 
@@ -188,20 +197,99 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
           className="contact__reservation"
           id="reservar"
         >
+          {/* GLASS LIGHT */}
+
+          <span className="contact__reservation-light" />
+          <span className="contact__reservation-glow" />
+
+          {/* =========================
+              TOP
+          ========================= */}
+
           <div className="contact__reservation-top">
-            <div>
-              <span className="contact__reservation-label">
-                DATOS DE LA SOLICITUD
+            <div className="contact__reservation-heading">
+              <span className="contact__reservation-index">
+                001
+              </span>
+
+              <div>
+                <span className="contact__reservation-label">
+                  DATOS DE LA SOLICITUD
+                </span>
+
+                <small>
+                  Completa tu solicitud
+                </small>
+              </div>
+            </div>
+
+            <div className="contact__reservation-request">
+              <span>
+                REQUEST / DANNO
               </span>
 
               <small>
-                Completa tu solicitud
+                PHOTOGRAPHY · VIDEO
               </small>
             </div>
+          </div>
 
-            <span className="contact__reservation-code">
-              REQUEST / DANNO
-            </span>
+          {/* =========================
+              STEPS
+          ========================= */}
+
+          <div className="contact__steps">
+            <div className="contact__step">
+              <span>
+                01
+              </span>
+
+              <div>
+                <strong>
+                  DATOS
+                </strong>
+
+                <small>
+                  Tú y tu servicio
+                </small>
+              </div>
+            </div>
+
+            <span className="contact__steps-line" />
+
+            <div className="contact__step">
+              <span>
+                02
+              </span>
+
+              <div>
+                <strong>
+                  FECHA
+                </strong>
+
+                <small>
+                  Día y horario
+                </small>
+              </div>
+            </div>
+
+            <span className="contact__steps-line" />
+
+            <div className="contact__step">
+              <span>
+                03
+              </span>
+
+              <div>
+                <strong>
+                  HISTORIA
+                </strong>
+
+                <small>
+                  Cuéntame tu idea
+                </small>
+              </div>
+            </div>
           </div>
 
           {/* =========================
@@ -212,32 +300,50 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
             className="contact__form"
             onSubmit={handleSubmit}
           >
-            {/* NOMBRE / SERVICIO */}
+            {/* =========================
+                NAME / SERVICE
+            ========================= */}
 
             <div className="contact__form-row">
               <div className="contact__field">
-                <label htmlFor="name">
-                  Nombre
-                </label>
+                <div className="contact__field-heading">
+                  <span>
+                    01
+                  </span>
 
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="¿Cómo te llamas?"
-                  autoComplete="name"
-                  required
-                />
+                  <label htmlFor="name">
+                    Nombre
+                  </label>
+                </div>
+
+                <div className="contact__input-shell">
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="¿Cómo te llamas?"
+                    autoComplete="name"
+                    required
+                  />
+
+                  <span className="contact__input-line" />
+                </div>
               </div>
 
               <div className="contact__field">
-                <label htmlFor="service">
-                  Tipo de servicio
-                </label>
+                <div className="contact__field-heading">
+                  <span>
+                    02
+                  </span>
 
-                <div className="contact__select-wrapper">
+                  <label htmlFor="service">
+                    Tipo de servicio
+                  </label>
+                </div>
+
+                <div className="contact__input-shell contact__select-wrapper">
                   <select
                     id="service"
                     name="service"
@@ -265,92 +371,144 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
                   </select>
 
                   <span className="contact__select-arrow" />
+
+                  <span className="contact__input-line" />
                 </div>
               </div>
             </div>
 
-            {/* FECHA / HORA */}
+            {/* =========================
+                DATE / TIME
+            ========================= */}
 
             <div className="contact__form-row">
               <div className="contact__field">
-                <label htmlFor="date">
-                  Fecha
-                </label>
+                <div className="contact__field-heading">
+                  <span>
+                    03
+                  </span>
 
-                <input
-                  id="date"
-                  type="date"
-                  name="date"
-                  min={getToday()}
-                  value={formData.date}
-                  onChange={handleChange}
-                  required
-                />
+                  <label htmlFor="date">
+                    Fecha
+                  </label>
+                </div>
+
+                <div className="contact__input-shell">
+                  <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    min={getToday()}
+                    value={formData.date}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <span className="contact__input-line" />
+                </div>
               </div>
 
               <div className="contact__field">
-                <label htmlFor="time">
-                  Hora
-                </label>
+                <div className="contact__field-heading">
+                  <span>
+                    04
+                  </span>
 
-                <input
-                  id="time"
-                  type="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  required
-                />
+                  <label htmlFor="time">
+                    Hora
+                  </label>
+                </div>
+
+                <div className="contact__input-shell">
+                  <input
+                    id="time"
+                    type="time"
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <span className="contact__input-line" />
+                </div>
               </div>
             </div>
 
-            {/* LUGAR */}
+            {/* =========================
+                LOCATION
+            ========================= */}
 
             <div className="contact__field">
-              <label htmlFor="location">
-                Lugar
-              </label>
+              <div className="contact__field-heading">
+                <span>
+                  05
+                </span>
 
-              <input
-                id="location"
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder="San Felipe, Gto. / Por definir"
-              />
-            </div>
+                <label htmlFor="location">
+                  Lugar
+                </label>
+              </div>
 
-            {/* IDEA */}
+              <div className="contact__input-shell">
+                <input
+                  id="location"
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  placeholder="San Felipe, Gto. / Por definir"
+                />
 
-            <div className="contact__field contact__field--message">
-              <label htmlFor="message">
-                Cuéntame tu idea
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="4"
-                placeholder="Platícame un poco sobre lo que tienes en mente..."
-              />
+                <span className="contact__input-line" />
+              </div>
             </div>
 
             {/* =========================
-                SUBMIT
+                IDEA
+            ========================= */}
+
+            <div className="contact__field contact__field--message">
+              <div className="contact__field-heading">
+                <span>
+                  06
+                </span>
+
+                <label htmlFor="message">
+                  Cuéntame tu idea
+                </label>
+              </div>
+
+              <div className="contact__input-shell">
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="4"
+                  placeholder="Platícame un poco sobre lo que tienes en mente..."
+                />
+
+                <span className="contact__input-line" />
+              </div>
+            </div>
+
+            {/* =========================
+                SUBMIT AREA
             ========================= */}
 
             <div className="contact__submit-area">
               <div className="contact__submit-info">
-                <span>
-                  LISTO PARA ENVIAR
-                </span>
+                <div className="contact__submit-status">
+                  <span className="contact__status-dot" />
+
+                  <span>
+                    LISTO PARA ENVIAR
+                  </span>
+                </div>
 
                 <small>
-                  Se abrirá una conversación
-                  directamente con Danno.
+                  Se abrirá una conversación directamente
+                  con Danno.
                 </small>
               </div>
 
@@ -358,6 +516,8 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
                 type="submit"
                 className="contact__submit"
               >
+                <span className="contact__submit-light" />
+
                 <span className="contact__submit-copy">
                   <strong>
                     SOLICITAR POR WHATSAPP
@@ -367,6 +527,8 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
                     Consultar disponibilidad
                   </small>
                 </span>
+
+                <span className="contact__submit-line" />
 
                 <span className="contact__submit-icon">
                   <span />
@@ -382,14 +544,17 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
 
           <div className="contact__reservation-bottom">
             <span>
+              <i />
               WHATSAPP DIRECTO
             </span>
 
             <span>
+              <i />
               RESPUESTA PERSONAL
             </span>
 
             <span>
+              <i />
               SIN COMPROMISO
             </span>
           </div>
@@ -398,7 +563,10 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
               CAMERA FOCUS
           ========================= */}
 
-          <div className="contact__focus">
+          <div
+            className="contact__focus"
+            aria-hidden="true"
+          >
             <span />
             <span />
             <span />
@@ -420,9 +588,13 @@ ${formData.message || 'Quiero conocer más información sobre el servicio.'}
             SAN FELIPE / GUANAJUATO
           </span>
 
+          <span className="contact__bottom-line" />
+
           <span>
             FOTOGRAFÍA + VIDEO
           </span>
+
+          <span className="contact__bottom-line" />
 
           <span>
             DANNO © 2026

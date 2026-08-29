@@ -1,21 +1,52 @@
+/* =========================================================
+   HERO — DANNO
+   Cinematic Photography Cover
+========================================================= */
+
 .hero {
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
 
   background: #0b0a09;
 }
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .hero__container {
   position: relative;
 
   width: 100%;
   height: 100vh;
-  min-height: 100vh;
+  height: 100svh;
+
+  min-height: 680px;
 
   overflow: hidden;
 
-  background: #111;
+  background: #0b0a09;
+
+  isolation: isolate;
 }
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .hero__image {
   width: 100%;
@@ -25,362 +56,1952 @@
 
   object-fit: cover;
   object-position: center center;
+
+  transform: scale(1.012);
+
+  filter:
+    contrast(1.035)
+    saturate(0.92)
+    brightness(0.95);
+
+  will-change:
+    transform,
+    filter;
+
+  animation:
+    heroCameraDrift
+    20s
+    ease-in-out
+    infinite alternate;
 }
+
+/* =========================================================
+   IMAGE WARM GLOW
+========================================================= */
+
+.hero__image-glow {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 58% 44%,
+      rgba(218, 173, 130, 0.055),
+      transparent 27%
+    );
+
+  mix-blend-mode: screen;
+
+  animation:
+    heroImageGlow
+    9s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   MAIN OVERLAY
+========================================================= */
 
 .hero__overlay {
   position: absolute;
   inset: 0;
 
+  z-index: 1;
+
+  pointer-events: none;
+
   background:
     linear-gradient(
       90deg,
-      rgba(8, 7, 6, 0.72) 0%,
-      rgba(8, 7, 6, 0.34) 34%,
-      rgba(8, 7, 6, 0.08) 68%
+      rgba(7, 6, 5, 0.84) 0%,
+      rgba(7, 6, 5, 0.64) 17%,
+      rgba(7, 6, 5, 0.32) 36%,
+      rgba(7, 6, 5, 0.08) 65%,
+      rgba(7, 6, 5, 0.11) 100%
     ),
     linear-gradient(
       0deg,
-      rgba(8, 7, 6, 0.62) 0%,
-      transparent 45%
+      rgba(7, 6, 5, 0.72) 0%,
+      rgba(7, 6, 5, 0.08) 44%,
+      rgba(7, 6, 5, 0.13) 100%
     );
 }
 
-.hero__content {
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.hero__vignette {
   position: absolute;
+  inset: 0;
+
   z-index: 2;
 
-  top: 43%;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 42%,
+      rgba(5, 4, 4, 0.07) 67%,
+      rgba(5, 4, 4, 0.45) 115%
+    );
+}
+
+/* =========================================================
+   CINEMATIC EXPOSURE
+========================================================= */
+
+.hero__exposure {
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.hero__exposure > span {
+  position: absolute;
+
+  top: -30%;
+  bottom: -30%;
+  left: -38%;
+
+  width: 18%;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 240, 225, 0.015),
+      rgba(255, 225, 196, 0.065),
+      rgba(200, 170, 141, 0.04),
+      transparent
+    );
+
+  filter: blur(18px);
+
+  transform: skewX(-17deg);
+
+  animation:
+    heroExposureSweep
+    12s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   FILM GRAIN
+========================================================= */
+
+.hero__grain {
+  position: absolute;
+  inset: 0;
+
+  z-index: 4;
+
+  opacity: 0.055;
+
+  pointer-events: none;
+
+  background-image:
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(255, 255, 255, 0.07) 0,
+      rgba(255, 255, 255, 0.07) 0.4px,
+      transparent 0.6px,
+      transparent 2px
+    );
+
+  background-size: 5px 5px;
+
+  mix-blend-mode: soft-light;
+
+  animation:
+    heroGrainMove
+    8s
+    steps(8)
+    infinite;
+}
+
+/* =========================================================
+   OLD VIEWFINDER
+   REMOVED
+
+   El JSX puede seguir teniendo el div.
+   CSS lo oculta completamente.
+========================================================= */
+
+.hero__viewfinder {
+  display: none;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.hero__content {
+  position: absolute;
+
+  top: 44%;
   left: 3%;
 
-  width: min(410px, 90%);
+  z-index: 10;
 
-  transform: translateY(-50%);
+  width:
+    min(
+      435px,
+      91%
+    );
+
+  transform:
+    translateY(-50%);
 }
 
-.hero__eyebrow {
-  margin: 0 0 4px;
+/* =========================================================
+   EYEBROW
+========================================================= */
 
-  color: #c2a384;
-
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-}
-
-.hero__title {
-  margin: 0;
-
-  color: #f5f0ea;
-
-  font-family: 'Kanit', sans-serif;
-  font-size: clamp(3.4rem, 5.8vw, 5.6rem);
-  font-weight: 500;
-
-  line-height: 0.92;
-  letter-spacing: 0.04em;
-
-  text-transform: uppercase;
-}
-
-.hero__subtitle {
-  margin: 12px 0 0;
-
-  max-width: 370px;
-
-  color: rgba(245, 240, 234, 0.78);
-
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 400;
-
-  line-height: 1.65;
-  letter-spacing: 0.01em;
-}
-
-.hero__location {
-  margin: 12px 0 0;
-
-  color: rgba(245, 240, 234, 0.62);
-
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 500;
-
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
-.hero__buttons {
-  margin-top: 24px;
+.hero__eyebrow-wrap {
+  margin-bottom: 9px;
 
   display: flex;
   align-items: center;
-  gap: 12px;
+
+  gap: 11px;
 }
+
+/* =========================================================
+   EYEBROW LINE
+========================================================= */
+
+.hero__eyebrow-line {
+  position: relative;
+
+  width: 30px;
+  height: 1px;
+
+  overflow: hidden;
+
+  background:
+    rgba(200, 170, 141, 0.23);
+}
+
+.hero__eyebrow-line::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d7b697,
+      transparent
+    );
+
+  animation:
+    heroEyebrowSweep
+    5.5s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   EYEBROW TEXT
+========================================================= */
+
+.hero__eyebrow {
+  margin: 0;
+
+  color:
+    rgba(210, 177, 145, 0.83);
+
+  font-family:
+    'Oswald',
+    sans-serif;
+
+  font-size: 0.74rem;
+  font-weight: 400;
+
+  letter-spacing: 0.3em;
+
+  text-transform: uppercase;
+
+  animation:
+    heroEyebrowBreath
+    6s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   DANNO
+   CINEMATIC SIGNATURE TITLE
+========================================================= */
+
+.hero__title {
+  position: relative;
+
+  width: fit-content;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  filter:
+    drop-shadow(
+      0 15px 34px
+      rgba(0, 0, 0, 0.28)
+    );
+}
+
+/* =========================================================
+   TITLE LETTER CONTAINER
+========================================================= */
+
+.hero__title-letters {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.025em;
+
+  font-family:
+    'Kanit',
+    sans-serif;
+
+  font-size:
+    clamp(
+      4.35rem,
+      6.15vw,
+      6.45rem
+    );
+
+  font-weight: 500;
+
+  line-height: 0.88;
+
+  letter-spacing: -0.025em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   INDIVIDUAL LETTER
+========================================================= */
+
+.hero__title-letter {
+  position: relative;
+
+  display: inline-block;
+
+  color: transparent;
+
+  background:
+    linear-gradient(
+      115deg,
+      #aca39c 0%,
+      #ded6cf 17%,
+      #f5f0ea 34%,
+      #ffffff 46%,
+      #d7b99e 54%,
+      #fffaf5 68%,
+      #cfc7c0 100%
+    );
+
+  background-size:
+    350% 100%;
+
+  background-position:
+    115% center;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-stroke:
+    0.25px
+    rgba(255, 255, 255, 0.08);
+
+  transform:
+    translateZ(0);
+
+  animation:
+    heroLetterCinematic
+    9s
+    ease-in-out
+    infinite;
+
+  animation-delay:
+    calc(
+      var(--letter-index)
+      * 0.28s
+    );
+}
+
+/* =========================================================
+   SECOND LIGHT INSIDE LETTERS
+========================================================= */
+
+.hero__title-letter::after {
+  content:
+    attr(data-letter);
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  color: transparent;
+
+  background:
+    linear-gradient(
+      105deg,
+      transparent 14%,
+      rgba(255, 255, 255, 0.04) 30%,
+      #ffffff 47%,
+      #d6b493 54%,
+      rgba(255, 255, 255, 0.08) 66%,
+      transparent 81%
+    );
+
+  background-size:
+    350% 100%;
+
+  background-position:
+    120% center;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  animation:
+    heroLetterHighlight
+    9s
+    ease-in-out
+    infinite;
+
+  animation-delay:
+    calc(
+      var(--letter-index)
+      * 0.28s
+    );
+}
+
+/* =========================================================
+   LIGHT ACROSS FULL WORD
+========================================================= */
+
+.hero__title-light {
+  position: absolute;
+
+  top: -40%;
+  bottom: -40%;
+  left: -40%;
+
+  z-index: 4;
+
+  width: 13%;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.17),
+      rgba(220, 185, 151, 0.11),
+      rgba(255, 255, 255, 0.04),
+      transparent
+    );
+
+  filter: blur(5px);
+
+  mix-blend-mode: screen;
+
+  transform: skewX(-14deg);
+
+  animation:
+    heroTitleLightPass
+    9s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   TITLE UNDERGLOW
+========================================================= */
+
+.hero__title::after {
+  content: '';
+
+  position: absolute;
+
+  left: 3%;
+  right: 8%;
+  bottom: -10px;
+
+  z-index: 0;
+
+  height: 20px;
+
+  opacity: 0.18;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(200, 170, 141, 0.28),
+      transparent 70%
+    );
+
+  filter: blur(12px);
+
+  animation:
+    heroTitleUnderGlow
+    7s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   TITLE DIVIDER
+========================================================= */
+
+.hero__title-divider {
+  position: relative;
+
+  width:
+    min(
+      295px,
+      72%
+    );
+
+  height: 1px;
+
+  margin:
+    15px 0
+    16px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(200, 170, 141, 0.31),
+      rgba(245, 240, 234, 0.045),
+      transparent
+    );
+}
+
+.hero__title-divider > span {
+  position: absolute;
+
+  top: 0;
+  left: -30%;
+
+  width: 30%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #c8aa8d,
+      transparent
+    );
+
+  animation:
+    heroDividerSweep
+    6s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.hero__subtitle {
+  margin: 0;
+
+  max-width: 375px;
+
+  color:
+    rgba(245, 240, 234, 0.69);
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size: 0.86rem;
+  font-weight: 400;
+
+  line-height: 1.67;
+
+  letter-spacing: 0.004em;
+
+  text-shadow:
+    0 3px 15px
+    rgba(0, 0, 0, 0.16);
+}
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.hero__location {
+  margin-top: 13px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color:
+    rgba(245, 240, 234, 0.48);
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size: 0.64rem;
+  font-weight: 500;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   LOCATION DOT
+========================================================= */
+
+.hero__location-dot {
+  width: 4px;
+  height: 4px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    #c8aa8d;
+
+  box-shadow:
+    0 0 10px
+    rgba(200, 170, 141, 0.25);
+
+  animation:
+    heroLocationDot
+    3s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.hero__buttons {
+  margin-top: 25px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   BUTTON BASE
+========================================================= */
 
 .hero__button {
   position: relative;
 
-  min-width: 145px;
-  padding: 13px 22px;
+  min-width: 158px;
+  height: 47px;
 
-  display: inline-flex;
+  padding:
+    0 17px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    22px;
+
   align-items: center;
-  justify-content: center;
+
+  gap: 10px;
+
+  overflow: hidden;
 
   border-radius: 999px;
 
-  font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size: 0.68rem;
   font-weight: 600;
 
   letter-spacing: 0.08em;
 
-  overflow: hidden;
+  text-decoration: none;
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
 
   transition:
-    transform 0.3s ease,
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.4s
+      cubic-bezier(
+        0.2,
+        0.75,
+        0.2,
+        1
+      ),
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.hero__button:hover {
-  transform: translateY(-2px);
-}
+/* =========================================================
+   BUTTON LIGHT
+========================================================= */
 
-.hero__button--primary {
-  border: 1px solid #c8aa8d;
-
-  background: #c8aa8d;
-
-  color: #17120f;
-
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-.hero__button--primary:hover {
-  border-color: #dcc1a7;
-
-  background: #dcc1a7;
-
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
-}
-
-.hero__button--secondary {
-  border: 1px solid rgba(245, 240, 234, 0.3);
-
-  background: rgba(10, 8, 7, 0.18);
-
-  color: rgba(245, 240, 234, 0.9);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.hero__button--secondary:hover {
-  border-color: rgba(194, 163, 132, 0.8);
-
-  background: rgba(194, 163, 132, 0.12);
-
-  color: #ffffff;
-}
-
-/* =========================
-   SCROLL INDICATOR
-========================= */
-
-.hero__scroll {
+.hero__button-light {
   position: absolute;
-  left: 50%;
-  bottom: 26px;
-  z-index: 3;
 
-  width: 38px;
-  height: 38px;
+  top: -50%;
+  bottom: -50%;
+  left: -40%;
+
+  width: 20%;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.07),
+      transparent
+    );
+
+  filter: blur(5px);
+
+  transform: skewX(-18deg);
+
+  pointer-events: none;
+
+  animation:
+    heroButtonLight
+    7s
+    ease-in-out
+    infinite;
+}
+
+.hero__button--secondary
+.hero__button-light {
+  animation-delay: -3.5s;
+}
+
+/* =========================================================
+   BUTTON TEXT
+========================================================= */
+
+.hero__button-text {
+  position: relative;
+
+  z-index: 2;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   BUTTON ARROW
+========================================================= */
+
+.hero__button-arrow {
+  position: relative;
+
+  z-index: 2;
+
+  width: 22px;
+  height: 22px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid rgba(245, 240, 234, 0.22);
   border-radius: 50%;
 
-  background: rgba(10, 8, 7, 0.12);
+  transition:
+    transform 0.4s ease,
+    background-color 0.35s ease;
+}
 
-  transform: translateX(-50%);
+.hero__button-arrow > span {
+  position: relative;
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  width: 7px;
+  height: 7px;
+
+  border-top:
+    1px solid currentColor;
+
+  border-right:
+    1px solid currentColor;
+
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.hero__button--primary {
+  border:
+    1px solid
+    rgba(215, 183, 152, 0.86);
+
+  color: #17120f;
+
+  background:
+    linear-gradient(
+      110deg,
+      #b99879,
+      #cfad8d 45%,
+      #dbc0a5
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(0, 0, 0, 0.17),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.25);
+}
+
+.hero__button--primary
+.hero__button-arrow {
+  background:
+    rgba(23, 18, 15, 0.08);
+}
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.hero__button--secondary {
+  border:
+    1px solid
+    rgba(245, 240, 234, 0.27);
+
+  color:
+    rgba(245, 240, 234, 0.9);
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(10, 8, 7, 0.2)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.035);
+}
+
+.hero__button--secondary
+.hero__button-arrow {
+  border:
+    1px solid
+    rgba(200, 170, 141, 0.2);
+}
+
+/* =========================================================
+   BUTTON HOVER
+========================================================= */
+
+.hero__button:hover {
+  transform:
+    translateY(-3px);
+}
+
+.hero__button--primary:hover {
+  border-color:
+    #e4c8ac;
+
+  background:
+    linear-gradient(
+      110deg,
+      #c4a181,
+      #dfb997 48%,
+      #e3c7ab
+    );
+
+  box-shadow:
+    0 18px 45px
+    rgba(0, 0, 0, 0.25),
+
+    0 0 30px
+    rgba(200, 170, 141, 0.05);
+}
+
+.hero__button--secondary:hover {
+  border-color:
+    rgba(200, 170, 141, 0.72);
+
+  background:
+    rgba(200, 170, 141, 0.09);
+
+  box-shadow:
+    0 16px 40px
+    rgba(0, 0, 0, 0.2);
+}
+
+.hero__button:hover
+.hero__button-arrow {
+  transform:
+    translateX(3px);
+}
+
+/* =========================================================
+   FRAME META
+========================================================= */
+
+.hero__frame-meta {
+  position: absolute;
+
+  bottom: 35px;
+
+  z-index: 8;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  pointer-events: none;
+
+  font-family:
+    'Oswald',
+    sans-serif;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.17em;
+}
+
+.hero__frame-meta > span {
+  color:
+    rgba(245, 240, 234, 0.16);
+
+  font-size: 0.37rem;
+}
+
+.hero__frame-meta small {
+  color:
+    rgba(200, 170, 141, 0.27);
+
+  font-size: 0.33rem;
+}
+
+.hero__frame-meta--left {
+  left: 40px;
+}
+
+.hero__frame-meta--right {
+  right: 40px;
+}
+
+/* =========================================================
+   CAMERA FOCUS
+========================================================= */
+
+.hero__focus {
+  position: absolute;
+
+  top: 55%;
+  left: 57%;
+
+  z-index: 7;
+
+  width: 70px;
+  height: 70px;
+
+  opacity: 0.1;
+
+  pointer-events: none;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  animation:
+    heroFocusBreath
+    5.5s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   FOCUS CORNERS
+========================================================= */
+
+.hero__focus > span {
+  position: absolute;
+
+  width: 14px;
+  height: 14px;
+}
+
+.hero__focus > span:nth-child(1) {
+  top: 0;
+  left: 0;
+
+  border-top:
+    1px solid #c8aa8d;
+
+  border-left:
+    1px solid #c8aa8d;
+}
+
+.hero__focus > span:nth-child(2) {
+  top: 0;
+  right: 0;
+
+  border-top:
+    1px solid #c8aa8d;
+
+  border-right:
+    1px solid #c8aa8d;
+}
+
+.hero__focus > span:nth-child(3) {
+  bottom: 0;
+  left: 0;
+
+  border-bottom:
+    1px solid #c8aa8d;
+
+  border-left:
+    1px solid #c8aa8d;
+}
+
+.hero__focus > span:nth-child(4) {
+  right: 0;
+  bottom: 0;
+
+  border-right:
+    1px solid #c8aa8d;
+
+  border-bottom:
+    1px solid #c8aa8d;
+}
+
+/* =========================================================
+   FOCUS CROSS
+========================================================= */
+
+.hero__focus-cross {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 16px;
+  height: 16px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+}
+
+.hero__focus-cross span {
+  position: absolute;
+
+  background:
+    rgba(200, 170, 141, 0.45);
+}
+
+.hero__focus-cross
+span:first-child {
+  top: 50%;
+
+  width: 100%;
+  height: 1px;
+}
+
+.hero__focus-cross
+span:last-child {
+  left: 50%;
+
+  width: 1px;
+  height: 100%;
+}
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.hero__scroll {
+  position: absolute;
+
+  left: 50%;
+  bottom: 24px;
+
+  z-index: 12;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(245, 240, 234, 0.19);
+
+  border-radius: 50%;
+
+  background:
+    rgba(10, 8, 7, 0.18);
+
+  transform:
+    translateX(-50%);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
 
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    background-color 0.3s ease;
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    transform 0.35s ease;
 }
 
-.hero__scroll:hover {
-  border-color: rgba(200, 170, 141, 0.8);
+/* =========================================================
+   SCROLL RING
+========================================================= */
 
-  background: rgba(200, 170, 141, 0.12);
+.hero__scroll-ring {
+  position: absolute;
 
-  transform: translateX(-50%) translateY(-2px);
+  inset: 4px;
+
+  border:
+    1px solid
+    rgba(200, 170, 141, 0.09);
+
+  border-radius: 50%;
+
+  animation:
+    heroScrollRing
+    3.2s
+    ease-in-out
+    infinite;
 }
+
+/* =========================================================
+   SCROLL ARROW
+========================================================= */
 
 .hero__scroll-arrow {
   width: 8px;
   height: 8px;
 
-  border-right: 1px solid #f5f0ea;
-  border-bottom: 1px solid #f5f0ea;
+  border-right:
+    1px solid #f5f0ea;
+
+  border-bottom:
+    1px solid #f5f0ea;
 
   transform: rotate(45deg);
 
-  animation: hero-arrow 1.8s ease-in-out infinite;
+  animation:
+    heroArrow
+    1.8s
+    ease-in-out
+    infinite;
 }
 
-@keyframes hero-arrow {
-  0%,
-  100% {
-    transform: rotate(45deg) translate(-2px, -2px);
-    opacity: 0.45;
+.hero__scroll:hover {
+  border-color:
+    rgba(200, 170, 141, 0.75);
+
+  background:
+    rgba(200, 170, 141, 0.1);
+
+  transform:
+    translateX(-50%)
+    translateY(-3px);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+/* IMAGE MOVEMENT */
+
+@keyframes heroCameraDrift {
+  0% {
+    transform:
+      scale(1.012)
+      translate3d(
+        0,
+        0,
+        0
+      );
+
+    filter:
+      contrast(1.035)
+      saturate(0.92)
+      brightness(0.95);
   }
 
   50% {
-    transform: rotate(45deg) translate(2px, 2px);
+    filter:
+      contrast(1.04)
+      saturate(0.94)
+      brightness(0.97);
+  }
+
+  100% {
+    transform:
+      scale(1.045)
+      translate3d(
+        -0.4%,
+        -0.25%,
+        0
+      );
+
+    filter:
+      contrast(1.04)
+      saturate(0.94)
+      brightness(0.965);
+  }
+}
+
+/* IMAGE GLOW */
+
+@keyframes heroImageGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
     opacity: 1;
   }
 }
 
-/* =========================
-   TABLET
-========================= */
+/* HERO EXPOSURE */
 
-@media (max-width: 1100px) {
-  .hero__content {
-    top: 44%;
-    left: 3%;
+@keyframes heroExposureSweep {
+  0% {
+    left: -38%;
 
-    width: min(390px, 88%);
+    opacity: 0;
   }
 
-  .hero__title {
-    font-size: clamp(3.2rem, 7vw, 5rem);
+  18% {
+    opacity: 0;
   }
 
-  .hero__subtitle {
-    max-width: 350px;
+  34% {
+    opacity: 0.24;
+  }
 
-    font-size: 0.85rem;
+  52% {
+    opacity: 0.54;
+  }
+
+  72% {
+    opacity: 0.17;
+  }
+
+  100% {
+    left: 120%;
+
+    opacity: 0;
   }
 }
 
+/* GRAIN */
+
+@keyframes heroGrainMove {
+  0% {
+    transform:
+      translate(
+        0,
+        0
+      );
+  }
+
+  25% {
+    transform:
+      translate(
+        -1%,
+        1%
+      );
+  }
+
+  50% {
+    transform:
+      translate(
+        1%,
+        -1%
+      );
+  }
+
+  75% {
+    transform:
+      translate(
+        0.5%,
+        1%
+      );
+  }
+
+  100% {
+    transform:
+      translate(
+        -0.5%,
+        -0.5%
+      );
+  }
+}
+
+/* EYEBROW LINE */
+
+@keyframes heroEyebrowSweep {
+  0% {
+    left: -100%;
+
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  45%,
+  72% {
+    opacity: 0.85;
+  }
+
+  100% {
+    left: 100%;
+
+    opacity: 0;
+  }
+}
+
+/* EYEBROW TEXT */
+
+@keyframes heroEyebrowBreath {
+  0%,
+  100% {
+    color:
+      rgba(210, 177, 145, 0.67);
+
+    text-shadow:
+      0 0 0
+      rgba(200, 170, 141, 0);
+  }
+
+  50% {
+    color:
+      rgba(224, 191, 160, 0.95);
+
+    text-shadow:
+      0 0 14px
+      rgba(200, 170, 141, 0.05);
+  }
+}
+
+/* =========================================================
+   DANNO LETTERS
+========================================================= */
+
+@keyframes heroLetterCinematic {
+  0%,
+  100% {
+    background-position:
+      115% center;
+
+    filter:
+      brightness(0.9)
+      contrast(1);
+
+    opacity: 0.91;
+
+    transform:
+      scaleX(1);
+
+    text-shadow:
+      0 0 0
+      rgba(255, 255, 255, 0);
+  }
+
+  17% {
+    opacity: 0.94;
+  }
+
+  34% {
+    background-position:
+      82% center;
+
+    filter:
+      brightness(1.03)
+      contrast(1.02);
+
+    opacity: 1;
+  }
+
+  46% {
+    background-position:
+      52% center;
+
+    filter:
+      brightness(1.17)
+      contrast(1.03);
+
+    transform:
+      scaleX(1.012);
+
+    text-shadow:
+      0 0 18px
+      rgba(255, 245, 235, 0.035);
+  }
+
+  57% {
+    background-position:
+      35% center;
+
+    filter:
+      brightness(1.08);
+
+    transform:
+      scaleX(1.005);
+  }
+
+  78% {
+    background-position:
+      -10% center;
+
+    filter:
+      brightness(0.98);
+
+    text-shadow:
+      0 0 0
+      rgba(255, 255, 255, 0);
+  }
+}
+
+/* INDIVIDUAL HIGHLIGHT */
+
+@keyframes heroLetterHighlight {
+  0%,
+  24% {
+    background-position:
+      125% center;
+
+    opacity: 0;
+  }
+
+  37% {
+    opacity: 0.12;
+  }
+
+  46% {
+    background-position:
+      52% center;
+
+    opacity: 0.7;
+  }
+
+  54% {
+    opacity: 0.34;
+  }
+
+  66% {
+    background-position:
+      -10% center;
+
+    opacity: 0;
+  }
+
+  100% {
+    background-position:
+      -20% center;
+
+    opacity: 0;
+  }
+}
+
+/* LIGHT THROUGH ENTIRE DANNO */
+
+@keyframes heroTitleLightPass {
+  0%,
+  18% {
+    left: -40%;
+
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.12;
+  }
+
+  44% {
+    opacity: 0.72;
+  }
+
+  58% {
+    opacity: 0.32;
+  }
+
+  72%,
+  100% {
+    left: 120%;
+
+    opacity: 0;
+  }
+}
+
+/* TITLE UNDER GLOW */
+
+@keyframes heroTitleUnderGlow {
+  0%,
+  100% {
+    opacity: 0.07;
+
+    transform:
+      scaleX(0.8);
+  }
+
+  48% {
+    opacity: 0.24;
+
+    transform:
+      scaleX(1);
+  }
+
+  60% {
+    opacity: 0.18;
+  }
+}
+
+/* TITLE DIVIDER */
+
+@keyframes heroDividerSweep {
+  0% {
+    left: -30%;
+
+    opacity: 0;
+  }
+
+  28% {
+    opacity: 0;
+  }
+
+  45%,
+  75% {
+    opacity: 0.8;
+  }
+
+  100% {
+    left: 100%;
+
+    opacity: 0;
+  }
+}
+
+/* LOCATION */
+
+@keyframes heroLocationDot {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform:
+      scale(0.72);
+
+    box-shadow:
+      0 0 5px
+      rgba(200, 170, 141, 0.08);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+    box-shadow:
+      0 0 13px
+      rgba(200, 170, 141, 0.3);
+  }
+}
+
+/* BUTTON LIGHT */
+
+@keyframes heroButtonLight {
+  0% {
+    left: -40%;
+
+    opacity: 0;
+  }
+
+  22% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.28;
+  }
+
+  56% {
+    opacity: 0.68;
+  }
+
+  72% {
+    opacity: 0.2;
+  }
+
+  100% {
+    left: 125%;
+
+    opacity: 0;
+  }
+}
+
+/* FOCUS */
+
+@keyframes heroFocusBreath {
+  0%,
+  100% {
+    width: 62px;
+    height: 62px;
+
+    opacity: 0.07;
+  }
+
+  45% {
+    width: 75px;
+    height: 75px;
+
+    opacity: 0.19;
+  }
+
+  55% {
+    width: 71px;
+    height: 71px;
+
+    opacity: 0.16;
+  }
+}
+
+/* SCROLL RING */
+
+@keyframes heroScrollRing {
+  0%,
+  100% {
+    opacity: 0.2;
+
+    transform:
+      scale(0.88);
+  }
+
+  50% {
+    opacity: 0.65;
+
+    transform:
+      scale(1);
+  }
+}
+
+/* SCROLL ARROW */
+
+@keyframes heroArrow {
+  0%,
+  100% {
+    transform:
+      rotate(45deg)
+      translate(
+        -2px,
+        -2px
+      );
+
+    opacity: 0.35;
+  }
+
+  50% {
+    transform:
+      rotate(45deg)
+      translate(
+        2px,
+        2px
+      );
+
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+  .hero__content {
+    left: 3%;
+
+    width:
+      min(
+        410px,
+        90%
+      );
+  }
+
+  .hero__title-letters {
+    font-size:
+      clamp(
+        4rem,
+        7vw,
+        5.6rem
+      );
+  }
+
+  .hero__focus {
+    left: 60%;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
 @media (max-width: 900px) {
   .hero__image {
-    object-position: 58% center;
+    object-position:
+      58% center;
   }
 
   .hero__overlay {
     background:
       linear-gradient(
         0deg,
-        rgba(8, 7, 6, 0.9) 0%,
-        rgba(8, 7, 6, 0.48) 55%,
-        rgba(8, 7, 6, 0.12) 100%
+        rgba(8, 7, 6, 0.92) 0%,
+        rgba(8, 7, 6, 0.61) 38%,
+        rgba(8, 7, 6, 0.17) 73%,
+        rgba(8, 7, 6, 0.11) 100%
       );
   }
 
   .hero__content {
     top: auto;
-    bottom: 85px;
+
+    bottom: 88px;
     left: 24px;
 
-    width: calc(100% - 48px);
-    max-width: 420px;
+    width:
+      calc(
+        100% - 48px
+      );
+
+    max-width: 450px;
 
     transform: none;
   }
 
-  .hero__title {
-    font-size: clamp(3rem, 10vw, 4.8rem);
+  .hero__title-letters {
+    font-size:
+      clamp(
+        3.8rem,
+        11vw,
+        5.3rem
+      );
   }
 
-  .hero__subtitle {
-    max-width: 390px;
-
-    font-size: 0.86rem;
-    line-height: 1.6;
+  .hero__focus {
+    display: none;
   }
 
-  .hero__location {
-    font-size: 0.68rem;
-  }
-
-  .hero__scroll {
-    bottom: 20px;
-
-    width: 34px;
-    height: 34px;
+  .hero__frame-meta {
+    display: none;
   }
 }
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 600px) {
+  .hero__container {
+    min-height: 660px;
+  }
+
   .hero__image {
-    object-position: 60% center;
+    object-position:
+      60% center;
   }
 
   .hero__content {
     bottom: 70px;
     left: 20px;
 
-    width: calc(100% - 40px);
+    width:
+      calc(
+        100% - 40px
+      );
+  }
+
+  .hero__eyebrow-wrap {
+    gap: 9px;
+  }
+
+  .hero__eyebrow-line {
+    width: 21px;
   }
 
   .hero__eyebrow {
-    margin-bottom: 4px;
+    font-size: 0.63rem;
 
-    font-size: 0.68rem;
+    letter-spacing:
+      0.24em;
   }
 
-  .hero__title {
-    font-size: clamp(2.9rem, 15vw, 4.2rem);
+  .hero__title-letters {
+    font-size:
+      clamp(
+        3.5rem,
+        17vw,
+        4.8rem
+      );
+
+    letter-spacing:
+      -0.02em;
+  }
+
+  .hero__title-divider {
+    width: 70%;
+
+    margin:
+      12px 0
+      14px;
   }
 
   .hero__subtitle {
-    margin-top: 10px;
+    max-width: 335px;
 
-    max-width: 330px;
+    font-size: 0.8rem;
 
-    font-size: 0.82rem;
-    line-height: 1.55;
+    line-height: 1.6;
   }
 
   .hero__location {
-    margin-top: 10px;
+    margin-top: 11px;
+
+    font-size: 0.6rem;
   }
 
   .hero__buttons {
-    margin-top: 20px;
+    margin-top: 21px;
 
     flex-direction: column;
     align-items: flex-start;
+
+    gap: 9px;
   }
 
   .hero__button {
-    min-width: 170px;
-
-    text-align: center;
+    width: 180px;
+    height: 45px;
   }
 
   .hero__scroll {
+    display: none;
+  }
+
+  .hero__grain {
+    opacity: 0.04;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__image,
+  .hero__image-glow,
+  .hero__exposure > span,
+  .hero__grain,
+  .hero__eyebrow-line::after,
+  .hero__eyebrow,
+  .hero__title-letter,
+  .hero__title-letter::after,
+  .hero__title-light,
+  .hero__title::after,
+  .hero__title-divider > span,
+  .hero__location-dot,
+  .hero__button-light,
+  .hero__focus,
+  .hero__scroll-ring,
+  .hero__scroll-arrow {
+    animation: none;
+  }
+
+  .hero__title-letter {
+    background: none;
+
+    color: #f5f0ea;
+
+    -webkit-text-fill-color:
+      initial;
+  }
+
+  .hero__title-letter::after,
+  .hero__title-light {
     display: none;
   }
 }
