@@ -1,21 +1,20 @@
 /* =========================================================
    HEADER — DANNO
-   Minimal Glass / Photo First
+   FLOATING CINEMATIC NAVIGATION
+   Photo First / Premium Glass
 ========================================================= */
 
 .header {
   position: fixed;
-
   top: 0;
   left: 0;
-
   z-index: 1000;
 
   width: 100%;
 
   padding:
-    16px
-    3%;
+    11px
+    1.4%;
 
   pointer-events: none;
 
@@ -37,9 +36,7 @@
   width: 100%;
 
   display: flex;
-
-  align-items: center;
-
+  align-items: flex-start;
   justify-content: space-between;
 
   gap: 30px;
@@ -53,15 +50,13 @@
 
 .header__logo {
   position: relative;
-
   z-index: 5;
 
+  margin-top: 5px;
+
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
-
   justify-content: center;
 
   gap: 6px;
@@ -85,12 +80,19 @@
       0.75,
       0.2,
       1
-    );
+    ),
+    filter 0.4s ease;
 }
 
 .header__logo:hover {
   transform:
     translateY(-1px);
+
+  filter:
+    drop-shadow(
+      0 7px 20px
+      rgba(0, 0, 0, 0.28)
+    );
 }
 
 /* =========================================================
@@ -109,19 +111,13 @@
     'Kanit',
     sans-serif;
 
-  font-size: 1.18rem;
-
+  font-size: 1.15rem;
   font-weight: 600;
 
   line-height: 1;
 
-  letter-spacing: 0.39em;
+  letter-spacing: 0.38em;
 
-  /*
-   * IMPORTANTE:
-   * sin text-indent para que DANNO
-   * quede alineado con el texto inferior.
-   */
   text-indent: 0;
 
   text-shadow:
@@ -144,27 +140,24 @@
   padding: 0;
 
   display: flex;
-
   align-items: center;
-
   justify-content: flex-start;
 
   gap: 7px;
 
   color:
-    rgba(245, 240, 234, 0.32);
+    rgba(245, 240, 234, 0.28);
 
   font-family:
     'Oswald',
     sans-serif;
 
-  font-size: 0.32rem;
-
+  font-size: 0.3rem;
   font-weight: 400;
 
   line-height: 1;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 
   white-space: nowrap;
 }
@@ -202,29 +195,29 @@
   margin-left: auto;
 
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
 
-  gap: 13px;
+  gap: 10px;
+
+  transform:
+    translateY(-2px);
 }
 
 /* =========================================================
-   NAVIGATION GLASS
+   NAVIGATION
 ========================================================= */
 
 .header__nav {
   position: relative;
 
-  min-height: 43px;
+  height: 44px;
 
   padding:
     4px
     5px;
 
   display: flex;
-
   align-items: center;
 
   gap: 0;
@@ -233,42 +226,40 @@
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.09);
+    rgba(255, 255, 255, 0.075);
 
   border-radius: 999px;
 
   background:
     linear-gradient(
       110deg,
-      rgba(12, 10, 9, 0.24),
-      rgba(255, 255, 255, 0.025),
-      rgba(12, 10, 9, 0.19)
+      rgba(10, 8, 7, 0.13),
+      rgba(255, 255, 255, 0.02),
+      rgba(8, 7, 6, 0.11)
     );
 
   box-shadow:
     0 12px 30px
-    rgba(0, 0, 0, 0.12),
+    rgba(0, 0, 0, 0.1),
 
     inset 0 1px 0
-    rgba(255, 255, 255, 0.045),
+    rgba(255, 255, 255, 0.04),
 
     inset 0 -1px 0
-    rgba(0, 0, 0, 0.13);
+    rgba(0, 0, 0, 0.1);
 
   backdrop-filter:
-    blur(10px)
-    saturate(110%);
+    blur(7px)
+    saturate(108%);
 
   -webkit-backdrop-filter:
-    blur(10px)
-    saturate(110%);
-
-  transform:
-    translateZ(0);
+    blur(7px)
+    saturate(108%);
 
   isolation: isolate;
 
   transition:
+    height 0.45s ease,
     border-color 0.45s ease,
     background 0.45s ease,
     box-shadow 0.45s ease,
@@ -276,14 +267,13 @@
 }
 
 /* =========================================================
-   INNER GLASS EDGE
+   INNER GLASS BORDER
 ========================================================= */
 
 .header__nav::before {
   content: '';
 
   position: absolute;
-
   inset: 3px;
 
   z-index: 0;
@@ -298,7 +288,7 @@
 }
 
 /* =========================================================
-   BOTTOM DEPTH
+   NAV DEPTH
 ========================================================= */
 
 .header__nav::after {
@@ -306,20 +296,20 @@
 
   position: absolute;
 
-  left: 10%;
-  right: 10%;
-  bottom: -7px;
+  left: 13%;
+  right: 13%;
+  bottom: -6px;
 
   z-index: -2;
 
-  height: 12px;
+  height: 9px;
+
+  opacity: 0.2;
 
   border-radius: 50%;
 
-  opacity: 0.28;
-
   background:
-    rgba(0, 0, 0, 0.42);
+    rgba(0, 0, 0, 0.4);
 
   filter: blur(8px);
 
@@ -333,13 +323,13 @@
 .header__nav-glass-light {
   position: absolute;
 
-  top: -80%;
-  bottom: -80%;
+  top: -90%;
+  bottom: -90%;
   left: -25%;
 
   z-index: 1;
 
-  width: 10%;
+  width: 8%;
 
   opacity: 0;
 
@@ -349,9 +339,9 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.025),
-      rgba(255, 255, 255, 0.11),
-      rgba(200, 170, 141, 0.045),
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.08),
+      rgba(200, 170, 141, 0.035),
       transparent
     );
 
@@ -362,13 +352,13 @@
 
   animation:
     headerGlassReflection
-    11s
+    12s
     ease-in-out
     infinite;
 }
 
 /* =========================================================
-   NAV LINKS
+   NAV LINK
 ========================================================= */
 
 .header__nav-link {
@@ -376,16 +366,14 @@
 
   z-index: 3;
 
-  min-height: 33px;
+  height: 34px;
 
   padding:
     0
-    16px;
+    12px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   overflow: hidden;
@@ -397,7 +385,7 @@
   border-radius: 999px;
 
   color:
-    rgba(245, 240, 234, 0.59);
+    rgba(245, 240, 234, 0.62);
 
   background:
     transparent;
@@ -410,7 +398,7 @@
 
   font-weight: 500;
 
-  letter-spacing: 0.055em;
+  letter-spacing: 0.045em;
 
   text-decoration: none;
 
@@ -421,12 +409,12 @@
     border-color 0.35s ease,
     background 0.35s ease,
     transform 0.4s
-      cubic-bezier(
-        0.2,
-        0.75,
-        0.2,
-        1
-      ),
+    cubic-bezier(
+      0.2,
+      0.75,
+      0.2,
+      1
+    ),
     box-shadow 0.35s ease;
 }
 
@@ -436,7 +424,6 @@
 
 .header__nav-label {
   position: relative;
-
   z-index: 2;
 
   transition:
@@ -471,12 +458,12 @@
 
   transition:
     width 0.5s
-      cubic-bezier(
-        0.2,
-        0.75,
-        0.2,
-        1
-      ),
+    cubic-bezier(
+      0.2,
+      0.75,
+      0.2,
+      1
+    ),
     opacity 0.35s ease;
 }
 
@@ -497,8 +484,7 @@
 
   border-radius: 50%;
 
-  background:
-    #c8aa8d;
+  background: #c8aa8d;
 
   box-shadow:
     0 0 8px
@@ -518,37 +504,35 @@
 ========================================================= */
 
 .header__nav-link:hover {
-  color:
-    #fffaf5;
+  color: #fffaf5;
 
   background:
-    rgba(255, 255, 255, 0.025);
+    rgba(255, 255, 255, 0.02);
 
   transform:
     translateY(-1px);
 }
 
 /* =========================================================
-   ACTIVE LINK
+   ACTIVE NAV LINK
 ========================================================= */
 
 .header__nav-link--active {
-  color:
-    #fffaf5;
+  color: #fffaf5;
 
   border-color:
-    rgba(200, 170, 141, 0.11);
+    rgba(200, 170, 141, 0.1);
 
   background:
     linear-gradient(
       120deg,
-      rgba(200, 170, 141, 0.075),
-      rgba(255, 255, 255, 0.018)
+      rgba(200, 170, 141, 0.07),
+      rgba(255, 255, 255, 0.014)
     );
 
   box-shadow:
     inset 0 1px 0
-    rgba(255, 255, 255, 0.025);
+    rgba(255, 255, 255, 0.024);
 }
 
 .header__nav-link--active
@@ -559,9 +543,9 @@
 
 .header__nav-link--active
 .header__nav-active-line {
-  width: 26px;
+  width: 25px;
 
-  opacity: 0.65;
+  opacity: 0.6;
 
   animation:
     headerActiveLine
@@ -580,34 +564,32 @@
 
   animation:
     headerActiveDot
-    2.7s
+    2.8s
     ease-in-out
     infinite;
 }
 
 /* =========================================================
-   RESERVAR
+   CTA — RESERVAR
 ========================================================= */
 
 .header__cta {
   position: relative;
 
-  min-width: 118px;
-  height: 45px;
+  width: 118px;
+  height: 44px;
 
   padding:
     0
     7px
     0
-    18px;
+    17px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
-  gap: 11px;
+  gap: 9px;
 
   overflow: hidden;
 
@@ -615,12 +597,11 @@
 
   border:
     1px solid
-    rgba(225, 195, 166, 0.76);
+    rgba(225, 195, 166, 0.78);
 
   border-radius: 999px;
 
-  color:
-    #17120f;
+  color: #17120f;
 
   background:
     linear-gradient(
@@ -637,7 +618,7 @@
     rgba(0, 0, 0, 0.16),
 
     inset 0 1px 0
-    rgba(255, 255, 255, 0.32),
+    rgba(255, 255, 255, 0.34),
 
     inset 0 -1px 0
     rgba(71, 43, 25, 0.12);
@@ -646,22 +627,22 @@
     'Inter',
     sans-serif;
 
-  font-size: 0.64rem;
+  font-size: 0.63rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.075em;
 
   text-decoration: none;
 
   transition:
     transform 0.4s
-      cubic-bezier(
-        0.2,
-        0.75,
-        0.2,
-        1
-      ),
+    cubic-bezier(
+      0.2,
+      0.75,
+      0.2,
+      1
+    ),
     box-shadow 0.4s ease,
     filter 0.4s ease;
 }
@@ -687,9 +668,9 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.18),
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.17),
+      rgba(255, 255, 255, 0.48),
+      rgba(255, 255, 255, 0.11),
       transparent
     );
 
@@ -700,18 +681,13 @@
 
   animation:
     headerCtaReflection
-    7.5s
+    8s
     ease-in-out
     infinite;
 }
 
-/* =========================================================
-   CTA TEXT
-========================================================= */
-
 .header__cta-text {
   position: relative;
-
   z-index: 2;
 }
 
@@ -728,10 +704,10 @@
   height: 28px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
+
+  flex-shrink: 0;
 
   border-radius: 50%;
 
@@ -740,7 +716,7 @@
 
   box-shadow:
     inset 0 1px 0
-    rgba(255, 255, 255, 0.13);
+    rgba(255, 255, 255, 0.14);
 
   transition:
     transform 0.4s ease,
@@ -774,7 +750,7 @@
 
   box-shadow:
     0 18px 38px
-    rgba(0, 0, 0, 0.24),
+    rgba(0, 0, 0, 0.23),
 
     0 0 24px
     rgba(200, 170, 141, 0.05),
@@ -797,36 +773,40 @@
 ========================================================= */
 
 .header--scrolled {
-  padding-top: 10px;
+  padding:
+    8px
+    1.4%;
 }
 
 .header--scrolled
 .header__nav {
+  height: 44px;
+
   border-color:
-    rgba(200, 170, 141, 0.12);
+    rgba(200, 170, 141, 0.11);
 
   background:
     linear-gradient(
       115deg,
-      rgba(13, 11, 10, 0.82),
-      rgba(19, 15, 13, 0.74),
-      rgba(10, 9, 8, 0.8)
+      rgba(13, 11, 10, 0.8),
+      rgba(19, 15, 13, 0.72),
+      rgba(10, 9, 8, 0.78)
     );
 
   box-shadow:
-    0 18px 42px
-    rgba(0, 0, 0, 0.28),
+    0 16px 38px
+    rgba(0, 0, 0, 0.27),
 
     inset 0 1px 0
-    rgba(255, 255, 255, 0.055);
+    rgba(255, 255, 255, 0.05);
 
   backdrop-filter:
-    blur(22px)
-    saturate(120%);
+    blur(20px)
+    saturate(118%);
 
   -webkit-backdrop-filter:
-    blur(22px)
-    saturate(120%);
+    blur(20px)
+    saturate(118%);
 }
 
 .header--scrolled
@@ -839,7 +819,7 @@
 }
 
 /* =========================================================
-   MOBILE BUTTON
+   MOBILE MENU BUTTON
 ========================================================= */
 
 .header__menu-button {
@@ -853,7 +833,6 @@
   display: none;
 
   align-items: center;
-
   justify-content: center;
 
   flex-direction: column;
@@ -864,25 +843,25 @@
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.09);
+    rgba(255, 255, 255, 0.075);
 
   border-radius: 50%;
 
   background:
-    rgba(10, 8, 7, 0.22);
+    rgba(10, 8, 7, 0.17);
 
   box-shadow:
-    0 10px 25px
-    rgba(0, 0, 0, 0.12),
+    0 8px 20px
+    rgba(0, 0, 0, 0.1),
 
     inset 0 1px 0
-    rgba(255, 255, 255, 0.035);
+    rgba(255, 255, 255, 0.03);
 
   backdrop-filter:
-    blur(12px);
+    blur(9px);
 
   -webkit-backdrop-filter:
-    blur(12px);
+    blur(9px);
 
   cursor: pointer;
 }
@@ -892,21 +871,17 @@
   height: 1px;
 
   background:
-    rgba(245, 240, 234, 0.82);
+    rgba(245, 240, 234, 0.8);
 
   transition:
     transform 0.4s
-      cubic-bezier(
-        0.2,
-        0.75,
-        0.2,
-        1
-      );
+    cubic-bezier(
+      0.2,
+      0.75,
+      0.2,
+      1
+    );
 }
-
-/* =========================================================
-   MENU OPEN ICON
-========================================================= */
 
 .header--menu-open
 .header__menu-button
@@ -983,12 +958,12 @@
 
   transition:
     max-height 0.65s
-      cubic-bezier(
-        0.2,
-        0.75,
-        0.2,
-        1
-      ),
+    cubic-bezier(
+      0.2,
+      0.75,
+      0.2,
+      1
+    ),
     opacity 0.4s ease,
     padding 0.5s ease,
     border-color 0.4s ease;
@@ -1057,11 +1032,8 @@
   padding-bottom: 15px;
 
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
   border-bottom:
     1px solid
@@ -1115,7 +1087,7 @@
 }
 
 /* =========================================================
-   MOBILE NAV
+   MOBILE NAVIGATION
 ========================================================= */
 
 .header__mobile-nav {
@@ -1207,18 +1179,14 @@
     17px;
 
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
   border:
     1px solid
     rgba(200, 170, 141, 0.3);
 
-  color:
-    #f5f0ea;
+  color: #f5f0ea;
 
   background:
     linear-gradient(
@@ -1246,7 +1214,7 @@
   0%,
   100% {
     color:
-      rgba(246, 241, 235, 0.88);
+      rgba(246, 241, 235, 0.87);
 
     text-shadow:
       0 5px 16px
@@ -1260,8 +1228,8 @@
       0 5px 16px
       rgba(0, 0, 0, 0.25),
 
-      0 0 14px
-      rgba(200, 170, 141, 0.04);
+      0 0 13px
+      rgba(200, 170, 141, 0.035);
   }
 }
 
@@ -1288,22 +1256,22 @@
 
 @keyframes headerGlassReflection {
   0%,
-  20% {
+  22% {
     left: -25%;
 
     opacity: 0;
   }
 
-  38% {
-    opacity: 0.1;
+  40% {
+    opacity: 0.08;
   }
 
-  52% {
-    opacity: 0.43;
+  53% {
+    opacity: 0.34;
   }
 
-  68% {
-    opacity: 0.11;
+  67% {
+    opacity: 0.08;
   }
 
   84%,
@@ -1317,15 +1285,15 @@
 @keyframes headerActiveLine {
   0%,
   100% {
-    opacity: 0.25;
+    opacity: 0.22;
 
-    width: 18px;
+    width: 17px;
   }
 
   50% {
-    opacity: 0.7;
+    opacity: 0.66;
 
-    width: 29px;
+    width: 27px;
   }
 }
 
@@ -1354,25 +1322,25 @@
 
 @keyframes headerCtaReflection {
   0%,
-  18% {
+  20% {
     left: -40%;
 
     opacity: 0;
   }
 
-  38% {
-    opacity: 0.2;
+  40% {
+    opacity: 0.17;
   }
 
-  52% {
-    opacity: 0.68;
+  53% {
+    opacity: 0.62;
   }
 
   68% {
-    opacity: 0.16;
+    opacity: 0.14;
   }
 
-  83%,
+  84%,
   100% {
     left: 120%;
 
@@ -1410,30 +1378,40 @@
 @media (max-width: 1150px) {
   .header {
     padding:
-      14px
-      24px;
+      10px
+      16px;
   }
 
   .header__logo-word {
-    font-size: 1.05rem;
+    font-size: 1rem;
 
-    letter-spacing: 0.32em;
+    letter-spacing: 0.31em;
+  }
 
-    text-indent: 0;
+  .header__nav {
+    height: 42px;
   }
 
   .header__nav-link {
+    height: 32px;
+
     padding:
       0
-      12px;
+      10px;
 
     font-size: 0.59rem;
   }
 
   .header__cta {
-    min-width: 106px;
+    width: 108px;
+    height: 42px;
 
-    padding-left: 15px;
+    padding-left: 14px;
+  }
+
+  .header__cta-icon {
+    width: 26px;
+    height: 26px;
   }
 }
 
@@ -1444,11 +1422,16 @@
 @media (max-width: 880px) {
   .header {
     padding:
-      12px
-      20px;
+      10px
+      18px;
+  }
+
+  .header__inner {
+    align-items: center;
   }
 
   .header__logo {
+    margin-top: 0;
     margin-right: auto;
   }
 
@@ -1456,10 +1439,13 @@
     display: none;
   }
 
-  .header__cta {
-    height: 42px;
+  .header__right {
+    transform: none;
+  }
 
-    min-width: 104px;
+  .header__cta {
+    width: 105px;
+    height: 42px;
   }
 
   .header__menu-button {
@@ -1474,8 +1460,8 @@
 @media (max-width: 520px) {
   .header {
     padding:
-      10px
-      13px;
+      9px
+      12px;
   }
 
   .header__inner {
@@ -1483,11 +1469,9 @@
   }
 
   .header__logo-word {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 
-    letter-spacing: 0.25em;
-
-    text-indent: 0;
+    letter-spacing: 0.24em;
   }
 
   .header__logo-meta {
@@ -1495,27 +1479,26 @@
   }
 
   .header__cta {
-    min-width: 91px;
-
-    height: 40px;
+    width: 88px;
+    height: 38px;
 
     padding:
       0
-      6px
+      5px
       0
-      13px;
+      11px;
 
-    font-size: 0.57rem;
+    font-size: 0.55rem;
   }
 
   .header__cta-icon {
-    width: 24px;
-    height: 24px;
+    width: 23px;
+    height: 23px;
   }
 
   .header__menu-button {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .header__mobile {
