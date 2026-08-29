@@ -4,8 +4,102 @@ import heroImage from '../../assets/images/danno-hero.png'
 const heroTitle = 'DANNO'
 
 function Hero() {
+  const handlePointerMove = (event) => {
+    const hero = event.currentTarget
+    const rect = hero.getBoundingClientRect()
+
+    const x =
+      (event.clientX - rect.left) /
+      rect.width
+
+    const y =
+      (event.clientY - rect.top) /
+      rect.height
+
+    const rotateY =
+      (x - 0.5) * 1.8
+
+    const rotateX =
+      (0.5 - y) * 1.15
+
+    const moveX =
+      (x - 0.5) * -8
+
+    const moveY =
+      (y - 0.5) * -5
+
+    hero.style.setProperty(
+      '--hero-rotate-x',
+      `${rotateX}deg`
+    )
+
+    hero.style.setProperty(
+      '--hero-rotate-y',
+      `${rotateY}deg`
+    )
+
+    hero.style.setProperty(
+      '--hero-move-x',
+      `${moveX}px`
+    )
+
+    hero.style.setProperty(
+      '--hero-move-y',
+      `${moveY}px`
+    )
+
+    hero.style.setProperty(
+      '--hero-light-x',
+      `${x * 100}%`
+    )
+
+    hero.style.setProperty(
+      '--hero-light-y',
+      `${y * 100}%`
+    )
+  }
+
+  const handlePointerLeave = (event) => {
+    const hero = event.currentTarget
+
+    hero.style.setProperty(
+      '--hero-rotate-x',
+      '0deg'
+    )
+
+    hero.style.setProperty(
+      '--hero-rotate-y',
+      '0deg'
+    )
+
+    hero.style.setProperty(
+      '--hero-move-x',
+      '0px'
+    )
+
+    hero.style.setProperty(
+      '--hero-move-y',
+      '0px'
+    )
+
+    hero.style.setProperty(
+      '--hero-light-x',
+      '58%'
+    )
+
+    hero.style.setProperty(
+      '--hero-light-y',
+      '45%'
+    )
+  }
+
   return (
-    <section className="hero" id="inicio">
+    <section
+      className="hero"
+      id="inicio"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
       <div className="hero__container">
         {/* =========================
             BACKGROUND
@@ -21,12 +115,12 @@ function Hero() {
           <div className="hero__image-glow" />
         </div>
 
+        {/* =========================
+            CINEMATIC OVERLAYS
+        ========================= */}
+
         <div className="hero__overlay" />
         <div className="hero__vignette" />
-
-        {/* =========================
-            EXPOSURE
-        ========================= */}
 
         <div className="hero__exposure">
           <span />
@@ -35,24 +129,12 @@ function Hero() {
         <div className="hero__grain" />
 
         {/* =========================
-            CAMERA FRAME
-        ========================= */}
-
-        <div
-          className="hero__viewfinder"
-          aria-hidden="true"
-        >
-          <span className="hero__viewfinder-corner hero__viewfinder-corner--top-left" />
-          <span className="hero__viewfinder-corner hero__viewfinder-corner--top-right" />
-          <span className="hero__viewfinder-corner hero__viewfinder-corner--bottom-left" />
-          <span className="hero__viewfinder-corner hero__viewfinder-corner--bottom-right" />
-        </div>
-
-        {/* =========================
             CONTENT
         ========================= */}
 
         <div className="hero__content">
+          {/* EYEBROW */}
+
           <div className="hero__eyebrow-wrap">
             <span className="hero__eyebrow-line" />
 
@@ -91,14 +173,20 @@ function Hero() {
             </span>
           </h1>
 
+          {/* DIVIDER */}
+
           <div className="hero__title-divider">
             <span />
           </div>
+
+          {/* DESCRIPTION */}
 
           <p className="hero__subtitle">
             Retratos, eventos y sesiones exteriores con
             una visión cinematográfica.
           </p>
+
+          {/* LOCATION */}
 
           <div className="hero__location">
             <span className="hero__location-dot" />
@@ -108,9 +196,7 @@ function Hero() {
             </span>
           </div>
 
-          {/* =========================
-              BUTTONS
-          ========================= */}
+          {/* BUTTONS */}
 
           <div className="hero__buttons">
             <a
@@ -146,7 +232,7 @@ function Hero() {
         </div>
 
         {/* =========================
-            META
+            FRAME METADATA
         ========================= */}
 
         <div
@@ -176,7 +262,7 @@ function Hero() {
         </div>
 
         {/* =========================
-            FOCUS
+            CAMERA FOCUS
         ========================= */}
 
         <div
